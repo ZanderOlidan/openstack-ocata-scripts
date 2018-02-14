@@ -3,6 +3,12 @@
 
 > Olidan Felixander Kai Espiritu - 16039561D
 
+_Note:_ If any error occurs, there are many ways to debug. It's possible to go
+through the logs directory for ERRORS that may come up.
+```
+/var/logs/<service>
+```
+
 # Preliminary Steps - Environment
 
 Most of the items are based on the installation instruction in the OpenStack Ocata Page linked below:
@@ -248,4 +254,35 @@ Launching the instance will need the selfservice net id which can be taken from 
 openstack network list
 ```
 
+# Things to keep in mind
+
+When restarting and trying to access the instances, make sure that the network
+services and servers are active. To check, 
+
+```
+openstack server list
+```
+
+It shows the servers that outputs like so:
+
++--------------------------------------+----------------------+--------+-------------------------+------------+
+| ID                                   | Name                 | Status | Networks                | Image Name |
++--------------------------------------+----------------------+--------+-------------------------+------------+
+| 1c376f83-bd1a-410d-9978-0f5d2c676d7b | provider-instance    | BUILD  |                         | cirros     |
+| ea9e26ff-0bb1-43bd-94f8-0eeac609a6f2 | selfservice-instance | ACTIVE | selfservice=172.16.1.11 | cirros     |
++--------------------------------------+----------------------+--------+-------------------------+------------+
+
+Make sure that it's `ACTIVE` before going beyond. The names above are the name
+of the instances. Incase the `STATUS` is SHUTOFF, start them by doing the
+commands below:
+
+```bash
+nova start <name> 
+
+## i.e.
+## nova start selfservice-instance
+```
+
+Check `nova` services. Restart the services if any error occurs when accessing
+the vnc
 
