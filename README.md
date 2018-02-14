@@ -282,6 +282,7 @@ nova start <name>
 ## i.e.
 ## nova start selfservice-instance
 ```
+List the servers again and check if it's active. It may take awhile.
 
 Check `nova` services. Restart the services if any error occurs when accessing
 the vnc
