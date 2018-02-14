@@ -265,12 +265,10 @@ openstack server list
 
 It shows the servers that outputs like so:
 
-+--------------------------------------+----------------------+--------+-------------------------+------------+
 | ID                                   | Name                 | Status | Networks                | Image Name |
-+--------------------------------------+----------------------+--------+-------------------------+------------+
+|--------------------------------------|:--------------------:|:------:|-------------------------|------------|
 | 1c376f83-bd1a-410d-9978-0f5d2c676d7b | provider-instance    | BUILD  |                         | cirros     |
 | ea9e26ff-0bb1-43bd-94f8-0eeac609a6f2 | selfservice-instance | ACTIVE | selfservice=172.16.1.11 | cirros     |
-+--------------------------------------+----------------------+--------+-------------------------+------------+
 
 Make sure that it's `ACTIVE` before going beyond. The names above are the name
 of the instances. Incase the `STATUS` is SHUTOFF, start them by doing the
