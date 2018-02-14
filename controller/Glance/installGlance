@@ -1,0 +1,38 @@
+######
+## GLANCE INSTALLATION 
+#####
+
+## Setup the tables
+sudo mysql -u root -p < db.sql
+
+## Set system variables
+. ../Keystone/testing/admin-openrc
+
+## Create Glance User
+openstack user create --domain default --password-prompt glance
+
+openstack role add --project service --user glance admin
+
+### Create Glance service entity
+
+openstack service create --name glance \
+  --description "OpenStack Image" image
+
+############
+### API ENDPOINTS
+#########
+
+### Public, internal, admin
+
+openstack endpoint create --region RegionOne \
+  image public http://controller:9292
+openstack endpoint create --region RegionOne \
+  image internal http://controller:9292
+openstack endpoint create --region RegionOne \
+  image admin http://controller:9292
+
+#####
+## Install Glance from repo
+###
+
+sudo apt install glance

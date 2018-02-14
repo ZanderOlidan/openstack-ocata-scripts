@@ -1,0 +1,33 @@
+######
+## Post Config
+#####
+
+#############3
+## Make sure that the first script has been ran, configured /etc/keystone/keystone.conf
+## before running the below commands
+###########
+
+sudo su -s /bin/sh -c "keystone-manage db_sync" keystone
+
+## Fernet initialization
+sudo keystone-manage fernet_setup --keystone-user keystone --keystone-group keystone
+sudo keystone-manage credential_setup --keystone-user keystone --keystone-group keystone
+
+## Bootstrap keystone service
+sudo keystone-manage bootstrap --bootstrap-password letmein \
+  --bootstrap-admin-url http://controller:35357/v3/ \
+  --bootstrap-internal-url http://controller:5000/v3/ \
+  --bootstrap-public-url http://controller:5000/v3/ \
+  --bootstrap-region-id RegionOne
+
+## Setup ServerName Apache
+source Apache/00-apacheConfig
+
+## Set global variables for current user
+export OS_USERNAME=admin
+export OS_PASSWORD=letmein
+export OS_PROJECT_NAME=admin
+export OS_USER_DOMAIN_NAME=Default
+export OS_PROJECT_DOMAIN_NAME=Default
+export OS_AUTH_URL=http://controller:35357/v3
+export OS_IDENTITY_API_VERSION=3

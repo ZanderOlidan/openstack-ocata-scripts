@@ -1,0 +1,9 @@
+######
+## Memcached caching service
+####
+
+sudo apt install memcached python-memcache -y
+
+# Configure config to use controller node on the management network
+#
+

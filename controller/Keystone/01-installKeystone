@@ -1,0 +1,9 @@
+#### 
+# Setup Keystone SQL
+#####
+
+# Create tables and grant previliges
+sudo mysql -u root -p < script.sql
+
+# Install keystone
+sudo apt install keystone -y

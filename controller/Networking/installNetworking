@@ -1,0 +1,34 @@
+#####
+## Networking (Neutron) in controller node
+#####
+
+
+## Take all global variables from admin-openrc file
+source ../admin-openrc
+
+## Setup sql
+sudo mysql -u root -p < dbSetup.sql
+
+## Create service user neutron
+openstack user create --domain default --password-prompt neutron
+
+## Add neutron to service project with admin role
+openstack role add --project service --user neutron admin
+
+## Create service entity network
+openstack service create --name neutron --description "OpenStack Networking" network
+
+## Create API endpoints in RegionOne with public, internal, admin endpoints
+openstack endpoint create --region RegionOne network public http://controller:9696
+openstack endpoint create --region RegionOne network internal http://controller:9696
+openstack endpoint create --region RegionOne network admin http://controller:9696
+
+########
+## OPTION 2 Networking - Self Service
+## Reason: Flexibility
+#######
+
+sudo apt install -y neutron-server neutron-plugin-ml2 neutron-linuxbridge-agent neutron-l3-agent neutron-dhcp-agent neutron-metadata-agent
+
+## After this, base the next steps in the documentation
+

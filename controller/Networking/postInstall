@@ -1,0 +1,26 @@
+#####
+# After configuration taken from the site, do the following
+# https://docs.openstack.org/ocata/install-guide-ubuntu/neutron-controller-install.html
+####
+
+## Populate DB
+sudo su -s /bin/sh -c "neutron-db-manage --config-file /etc/neutron/neutron.conf \
+  --config-file /etc/neutron/plugins/ml2/ml2_conf.ini upgrade head" neutron
+
+
+## Restart nova api
+echo "Restarting nova-api..."
+sudo service nova-api restart
+
+## Restart networking stuff
+
+echo "Restarting neutron-server ..."
+sudo service neutron-server restart
+echo "Restarting neutron-linuxbridge-agent ..."
+sudo service neutron-linuxbridge-agent restart
+echo "Restarting neutron-dhcp-agent ..."
+sudo service neutron-dhcp-agent restart
+echo "Restarting neutron-metadata-agent ..."
+sudo service neutron-metadata-agent restart
+echo "Restarting neutron-l3-agent ..."
+sudo service neutron-l3-agent restart

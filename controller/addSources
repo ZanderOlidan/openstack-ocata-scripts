@@ -1,0 +1,9 @@
+#####
+## Fetch openstack stuff
+
+sudo apt install software-properties-common -y
+sudo add-apt-repository cloud-archive:ocata -y
+
+sudo apt update 
+# Get client
+sudo apt install python-openstackclient -y

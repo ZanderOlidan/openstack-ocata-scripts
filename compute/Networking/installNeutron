@@ -1,0 +1,5 @@
+#####
+## Finish the controller node first
+#####
+
+sudo apt install -y neutron-linuxbridge-agent

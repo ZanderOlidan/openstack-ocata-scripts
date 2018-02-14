@@ -1,0 +1,12 @@
+#####
+## To verify network creation
+####
+
+source ../admin-openrc
+
+## Verify success of neutron-server
+openstack extension list --network
+
+## Check neutron-agents
+openstack network agent list
+

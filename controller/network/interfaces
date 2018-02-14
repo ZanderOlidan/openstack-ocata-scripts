@@ -1,0 +1,32 @@
+#######
+## CONTROL NODE
+#######
+source /etc/network/interfaces.d/*
+
+auto lo
+iface lo inet loopback
+
+## Main networks
+
+## Management Network Interface
+auto enp0s3
+iface enp0s3 inet static
+        network   10.10.10.0
+        address   10.10.10.10
+        broadcast 10.10.10.255
+        netmask   255.255.255.0
+        up ip link set $IFACE promisc on
+
+
+## Data network Interface
+auto enp0s8
+iface enp0s8 inet static
+        network   10.20.20.0
+        address   10.20.20.10
+        broadcast 10.20.20.255
+        netmask   255.255.255.0
+        up ip link set $IFACE promisc on
+
+## NATNetwork. DHCP based 
+auto enp0s9
+iface enp0s9 inet dhcp

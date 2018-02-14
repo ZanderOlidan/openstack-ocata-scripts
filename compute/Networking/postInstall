@@ -1,0 +1,9 @@
+####
+## Post installation 
+## Do all the configuration from docs
+###
+
+echo "Restarting nova-compute ..."
+sudo service nova-compute restart
+echo "Restarting neutron-linuxbridge-agent ..."
+sudo service neutron-linuxbridge-agent restart

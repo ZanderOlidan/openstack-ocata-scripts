@@ -1,0 +1,55 @@
+#######
+## Compute configuration inside the controller node
+## (For apis and configurations)
+######
+
+
+
+## Setup mysql to create nova, api and cell0
+## including priveleges
+sudo mysql -u root -p < db.sql
+
+## Set system variables
+. ../admin-openrc
+
+## Create nova user inside keystone
+openstack user create --domain default --password-prompt nova
+
+## Add the admin role for nova
+openstack role add --project service --user nova admin
+
+## Create a service entity for compute
+openstack service create --name nova \
+  --description "OpenStack Compute" compute
+
+## Create API endpoints at regionOne on public, internal and admin access
+openstack endpoint create --region RegionOne \
+  compute public http://controller:8774/v2.1
+
+openstack endpoint create --region RegionOne \
+  compute internal http://controller:8774/v2.1
+
+openstack endpoint create --region RegionOne \
+  compute admin http://controller:8774/v2.1
+
+
+## Create placement service (no idea what this is. Needs more studies)
+## Check https://docs.openstack.org/ocata/install-guide-ubuntu/nova-controller-install.html
+openstack user create --domain default --password-prompt placement
+
+
+## Placement for admin user 
+openstack role add --project service --user placement admin
+
+## Placement service for API
+openstack service create --name placement --description "Placement API" placement
+
+## Create API endpoints
+openstack endpoint create --region RegionOne placement public http://controller:8778
+openstack endpoint create --region RegionOne placement internal http://controller:8778
+openstack endpoint create --region RegionOne placement admin http://controller:8778
+
+## Installation of nova
+sudo apt install nova-api nova-conductor nova-consoleauth \
+  nova-novncproxy nova-scheduler nova-placement-api
+

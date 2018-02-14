@@ -1,0 +1,10 @@
+##
+# Create the selfservice network by demo user
+
+openstack network create selfservice
+
+openstack subnet create --network selfservice --dns-nameserver 8.8.8.8 --gateway 172.16.1.1 --subnet-range 172.16.1.0/24 selfservice
+
+#openstack router create router
+#neutron router-interface-add router selfservice
+#neutron router-gateway-set router provider

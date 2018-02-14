@@ -1,0 +1,13 @@
+#######
+## Messaging Service for coordination using RabbitMQ
+#####
+
+sudo apt install rabbitmq-server -y
+
+# Configure rabbit service, adding 'openstack' user with pass 'letmein'
+sudo rabbitmqctl add_user openstack letmein
+
+# Set permissions
+sudo rabbitmqctl set_permissions openstack ".*" ".*" ".*"
+
+

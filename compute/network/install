@@ -1,0 +1,7 @@
+## NETWORK
+# Copies network config
+
+sudo cp interfaces /etc/network/interfaces
+
+# Restart interfaces
+sudo service networking restart

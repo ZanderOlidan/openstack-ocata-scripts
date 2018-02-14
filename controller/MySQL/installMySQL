@@ -1,0 +1,16 @@
+######
+## Installation of MySQL for OpenStack
+#####
+
+# Install mariadb + python client for mysql
+sudo apt install mariadb-server python-pymysql -y
+
+# Add configurations on the install sql server
+# Source : https://docs.openstack.org/ocata/install-guide-ubuntu/environment-sql-database.html
+sudo cp mariadbConfig.conf /etc/mysql/mariadb.conf.d/99-openstack.cnf
+
+# Restart service
+sudo service mysql restart
+
+# Setup root password - (default: none)
+sudo mysql_secure_installation

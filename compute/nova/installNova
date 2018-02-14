@@ -1,0 +1,5 @@
+#######
+## This should be ran inside compute node
+#####
+
+sudo apt install nova-compute -y

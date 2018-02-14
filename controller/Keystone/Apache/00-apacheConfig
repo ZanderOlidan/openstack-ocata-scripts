@@ -1,0 +1,8 @@
+#### Append to file
+echo "ServerName" | sudo tee -a /etc/apache2/apache2.conf
+
+sudo service apache2 restart
+
+
+#Remove the db now as we're using mysql instead
+sudo rm -f /var/lib/keystone/keystone.db
