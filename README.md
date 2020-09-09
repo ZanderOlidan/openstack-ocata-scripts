@@ -1,7 +1,7 @@
 
 # Capstone Project - Setting up a Cloud System
 
-> Olidan Felixander Kai Espiritu - 16039561D
+> 
 
 _Note:_ If any error occurs, there are many ways to debug. It's possible to go
 through the logs directory for ERRORS that may come up.
